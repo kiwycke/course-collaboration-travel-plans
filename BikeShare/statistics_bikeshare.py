@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+from datetime import datetime, date
 
 '''
 Statistics Computed
@@ -113,6 +114,10 @@ class StatisticsBikeshare:
             except InvalidInput:
                 print('\n!! Type valid input please !! (eg.: \'y\' | \'yes\' | \'n\' | \'no\')\n\n'+'-'*48+'\n')
                 continue
+
+    def to_age(self, birth_year):
+        '''Converts birth year to age'''
+        return datetime.today().year - birth_year
 
     def get_filters(self):
         '''
@@ -232,9 +237,12 @@ class StatisticsBikeshare:
         # convert the Start Time column to datetime
         self.df['Start Time'] = pd.to_datetime(self.df['Start Time'])
 
-        # extract month and day of week from Start Time to create new columns
+        # extract Month and Day of Week from Start Time to create new columns
         self.df['Month'] = self.df['Start Time'].dt.month
         self.df['Day of week'] = self.df['Start Time'].dt.day_name()
+
+        # extract Age from Birth Year to create new column
+        self.df['Age'] = self.df['Birth Year'].astype('Int64').apply(self.to_age)
 
         # getting the corresponding int type numpy array
         months = np.array(list(months)).astype(int)
@@ -347,6 +355,10 @@ class StatisticsBikeshare:
             print('Earliest year of birth among participants:\n  {}\n'.format(self.df['Birth Year'].min())+'-'*10)
             print('Most recent year of birth among participants:\n  {}\n'.format(self.df['Birth Year'].max())+'-'*10)
             print('Most common year of birth among participants:\n  {}\n'.format(self.df['Birth Year'].mode()[0])+'-'*10)
+
+            # creating new DataFrame for transparency 
+            df_age = pd.DataFrame(self.df.groupby(['Age', 'Month'])['Trip Duration'].mean()).reset_index()
+            print('Average trip duration among participants\' younger than 20 years\':\n {}\n'.format(df_age[['Age', 'Trip Duration']].loc[df_age['Age'] < 20])+'-'*10)
         else:
             print('No birth year data to share.\n'+'-'*10)
 
@@ -354,7 +366,7 @@ class StatisticsBikeshare:
             # average trip duration by month distributed by gender
             print('Avg. Trip Duration by Month distributed by Gender:\n  {}\n'.format(self.df.groupby(['Gender', 'Month'])['Trip Duration'].mean())+'-'*10)
 
-            # areating new DataFrame for transparency 
+            # creating new DataFrame for transparency 
             df_gender = pd.DataFrame(self.df.groupby(['Gender', 'Month'])['Trip Duration'].mean()).reset_index()
 
             # plot for Avg. Trip Duration by Month distributed by Gender
@@ -373,9 +385,9 @@ class StatisticsBikeshare:
     def menu(self):
         cities, months, days = self.get_filters()
         self.df = self.load_data(cities, months, days)
-        self.time_stats()
-        self.station_stats()
-        self.trip_duration_stats()
+        #self.time_stats()
+        #self.station_stats()
+        #self.trip_duration_stats()
         self.user_stats()
         while True:
             try:
