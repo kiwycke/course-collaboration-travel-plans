@@ -12,22 +12,22 @@
 
 ###2 Popular stations and trip
 
-most common start station
-most common end station
-most common trip from start to end (i.e., most frequent combination of start station and end station)
+- most common start station
+- most common end station
+- most common trip from start to end (i.e., most frequent combination of start station and end station)
 ----------------------------------------
 
 ###3 Trip duration
 
-total travel time
-average travel time
+- total travel time
+- average travel time
 ----------------------------------------
 
 ###4 User info
 
-counts of each user type
-counts of each gender (only available for NYC and Chicago)
+- counts of each user type
+- counts of each gender (only available for NYC and Chicago)
 earliest, most recent, most common year of birth (only available for NYC and Chicago)
-average trip duration by month distributed by gender
-Plot for Avg. Trip Duration by Month distributed by Gender
+- average trip duration by month distributed by gender
+- Plot for Avg. Trip Duration by Month distributed by Gender
 ----------------------------------------
