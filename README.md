@@ -5,9 +5,9 @@
 
 ###1 Popular times of travel
 
-most common month
-most common day of week
-most common hour of day
+- most common month
+- most common day of week
+- most common hour of day
 ----------------------------------------
 
 ###2 Popular stations and trip
