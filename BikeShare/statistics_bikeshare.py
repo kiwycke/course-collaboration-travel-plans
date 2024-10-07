@@ -358,7 +358,20 @@ class StatisticsBikeshare:
 
             # creating new DataFrame for transparency 
             df_age = pd.DataFrame(self.df.groupby(['Age', 'Month'])['Trip Duration'].mean()).reset_index()
-            print('Average trip duration among participants\' younger than 20 years\':\n {}\n'.format(df_age[['Age', 'Trip Duration']].loc[df_age['Age'] < 20])+'-'*10)
+            print('Average trip duration among participants\' younger than 20 years\':\n {}\n'.format(df_age[['Age', 'Trip Duration', 'Month']].loc[df_age['Age'] < 20])+'-'*10)
+
+            # plot for Avg. Trip Duration distributed by age groups
+            plt.plot(df_age['Month'].loc[(df_age['Age'] < 30)], df_age['Trip Duration'].loc[(df_age['Age'] < 30)], 'm.', label = 'age < 30')
+            plt.plot(df_age['Month'].loc[(df_age['Age'] > 30) & (df_age['Age'] < 60)],
+                     df_age['Trip Duration'].loc[(df_age['Age'] > 30) & (df_age['Age'] < 60)], 'b.', alpha = 0.5, label = '30 < age < 60')
+            plt.plot(df_age['Month'].loc[(df_age['Age'] > 60) & (df_age['Age'] < 100)],
+                     df_age['Trip Duration'].loc[(df_age['Age'] > 60) & (df_age['Age'] < 100)], 'g.', alpha = 0.5, label = '60 < age < 100')
+            plt.plot(df_age['Month'].loc[(df_age['Age'] > 100)], df_age['Trip Duration'].loc[(df_age['Age'] > 100)], 'r.', alpha = 0.5, label = 'age > 100')
+            plt.title('Avg.Trip Duration by Month and Age groups\n age < 30, 30 < age < 60, 60 < age < 100, 100 < age')
+            plt.ylabel('Trip Duration')
+            plt.xlabel('Months')
+            plt.legend()
+            plt.show()
         else:
             print('No birth year data to share.\n'+'-'*10)
 
@@ -385,9 +398,9 @@ class StatisticsBikeshare:
     def menu(self):
         cities, months, days = self.get_filters()
         self.df = self.load_data(cities, months, days)
-        #self.time_stats()
-        #self.station_stats()
-        #self.trip_duration_stats()
+        self.time_stats()
+        self.station_stats()
+        self.trip_duration_stats()
         self.user_stats()
         while True:
             try:
