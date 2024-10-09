@@ -34,7 +34,9 @@ counts of each user type
 counts of each gender (only available for NYC and Chicago)
 earliest, most recent, most common year of birth (only available for NYC and Chicago)
 average trip duration by month distributed by gender
-Plot for Avg. Trip Duration by Month distributed by Gender
+plot for Avg. Trip Duration by Month distributed by Gender
+earliest, most recent, and most common year of birth
+plot for Avg. Trip Duration distributed by age groups
 ----------------------------------------
 '''
 
