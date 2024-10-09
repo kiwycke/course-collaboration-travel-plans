@@ -1,6 +1,5 @@
-
 # Project overview:
-##Statistics Computed
+## Statistics Computed
 
 ### 1 Popular times of travel (i.e., occurs most often in the start time)
 
@@ -32,3 +31,11 @@
 - earliest, most recent, and most common year of birth
 - plot for Avg. Trip Duration distributed by age groups
 ----------------------------------------
+----------------------------------------
+
+### Prerequisites
+
+- python 3.8
+- pandas 2.0.3
+- numpy 1.24.3
+- matplotlib 3.7.5
